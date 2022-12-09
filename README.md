@@ -17,4 +17,4 @@ Currently, RT_PPISCS supports the following three platforms:
 The architecture of RT_PPISCS was optimized to run on a normal desktop computer, so it does not require the use of GPU acceleration.
 
 ## Usage
-Refer to the documentation for detailed instructions on how to use RT_PPISCS.
+Refer to the examples files for detailed instructions on how to use RT_PPISCS.
