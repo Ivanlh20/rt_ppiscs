@@ -64,6 +64,14 @@ function [y] = fcn_eval_bz(y_i, bias, weights, bz)
     end
 end
 
+function x = swish(x)
+    x = x./(1+exp(-x));
+end
+
+function x = softplus(x)
+    x = log(1+exp(-abs(x))) + max(x,0);
+end
+
 function [y] = fcn_eval(y, bias, weights)
     n_lay = length(bias);
     
@@ -74,9 +82,5 @@ function [y] = fcn_eval(y, bias, weights)
     end
 
     y = y*weights{n_lay} + bias{n_lay};
-    y = log(1+exp(y));
-end
-
-function x = swish(x)
-    x = x./(1+exp(-x));
+    y = softplus(y);
 end

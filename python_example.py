@@ -1,30 +1,36 @@
-# Copyright 2022 Ivan Lobato <Ivanlh20@gmail.com>
+# Copyright 2023 Ivan Lobato <Ivanlh20@gmail.com>
 # zone_axis = 0: 110/101/011, 1: 001/100/010
 # [Z, zone_axis, E_0, c_30, c_10, cond_lens_outer_aper_ang, det_inner_ang, det_outer_ang, rmsd_3d]
 
 import matplotlib.pyplot as plt
 import numpy as np
-from model import ilp_scs_fcc
+from ilp_scs_fcc import ilp_scs_fcc
 
 x = np.array([79, 0, 300, 0.001, -50, 20, 30, 90, 0.085]).reshape((-1, 1))
 y_p = ilp_scs_fcc(x)
 
+# plt.plot([1, 2, 3, 4], [1, 4, 2, 3])
+# plt.text(0.5, 0.5, "Some Text", horizontalalignment='center',
+#      verticalalignment='center', transform=plt.gca().transAxes)
+# plt.show()
+
 plt.figure(1)
 plt.plot(y_p, '-r')
-plt.xlabel('Number of atoms', fontname = 'times', fontsize = 14)
-plt.ylabel('Scatering cross-sections (Å^2)', fontname = 'times', fontsize = 14)
-plt.pbaspect([1.25, 1, 1])
+plt.xlabel('Number of atoms', fontsize = 14)
+plt.ylabel('Scatering cross-sections (Å^2)', fontsize = 14)
+str_text_p = ['Z = {:d}'.format(int(x.take(0))),
+            'Zone axis = {}'.format('001' if x.take(1)>0.5 else '110'),
+            'E_0 = {:d}keV'.format(int(x.take(2))),
+            'Cs = {:3.1f}um'.format(1000*x.take(3)),
+            'Def = {:4.1f}Å'.format(x.take(4)),
+            'A. Rad = {:4.1f}mrad'.format(x.take(5)),
+            'Inner = {:4.1f}mrad'.format(x.take(6)),
+            'Outer = {:4.1f}mrad'.format(x.take(7)),
+            'Rmsd = {:4.3f}Å'.format(x.take(8))]
 
-# str_text = [f'Z = {int(x[0])}',
-#             f'Zone axis = '001' if x[1] else '110',
-#             f'E_0 = {int(x[2])}keV',
-#             f'Cs = {1000*x[3]:3.1f}um',
-#             f'Def = {x[4]:4.1f}Å',
-#             f'A. Rad = {x[5]:4.1f}mrad',
-#             f'Inner = {x[6]:4.1f}mrad',
-#             f'Outer = {x[7]:4.1f}mrad',
-#             f'Rmsd = {x[8]:4.3f}Å']
-
-# xt = np.ones(9)*0.75
-# yt = np.linspace(0.6, 0.0, 9)
-# plt.text(xt, yt, str_text, fontname = 'times', fontsize = 13)
+xp = np.ones((9,))*0.55
+yp = 0.05+np.linspace(0.55, 0.0, 9)
+for x_t, y_t, str_p in zip(xp, yp, str_text_p):
+	plt.text(x_t, y_t, str_p, fontsize = 13, transform=plt.gca().transAxes)
+ 
+plt.show()

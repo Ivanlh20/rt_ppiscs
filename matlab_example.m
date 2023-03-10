@@ -1,4 +1,4 @@
-% Copyright 2022 Ivan Lobato <Ivanlh20@gmail.com>
+% Copyright 2023 Ivan Lobato <Ivanlh20@gmail.com>
 % zone_axis = 0: 110/101/011, 1: 001/100/010
 % [Z, zone_axis, E_0, c_30, c_10, cond_lens_outer_aper_ang, det_inner_ang, det_outer_ang, rmsd_3d]
 
@@ -6,7 +6,7 @@ clear; clc;
 figure(1); clf;
 x = [79, 0, 300, 0.001, -50, 20, 30, 90, 0.085].';
 y_p = ilm_scs_fcc(x);
-plot(y_p, '-r');
+plot(y_p, '-r', 'LineWidth', 1.5);
 xlabel('Number of atoms', 'fontname', 'times', 'fontsize', 14);
 ylabel('Scatering cross-sections (Å^2)', 'fontname', 'times', 'fontsize', 14);
 pbaspect([1.25 1, 1]);
@@ -19,7 +19,6 @@ str_text{6} = ['A. Rad = ', num2str(x(6), '%4.1f'), 'mrad'];
 str_text{7} = ['Inner = ', num2str(x(7), '%4.1f'), 'mrad'];
 str_text{8} = ['Outer = ', num2str(x(8), '%4.1f'), 'mrad'];
 str_text{9} = ['Rmsd = ', num2str(x(9), '%4.3f'), 'Å'];
-xt = repmat(0.75, 1, 9);
-yt = 0.6:-0.06:0.0;
-yt = yt(1:9);
+xt = repmat(0.55, 1, 9);
+yt = 0.05 + linspace(0.55, 0.0, 9);
 text(xt, yt, str_text, 'units','normalized', 'fontname', 'times', 'fontsize', 13); 
