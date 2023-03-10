@@ -1,4 +1,4 @@
-# Real time simulations of ADF STEM probe position integrated scattering cross sections for fcc crystals using a densely connected neural network
+# Real-time simulations of ADF STEM probe position-integrated scattering cross-sections for single element fcc crystals in zone axis orientation using a densely connected neural network
 
 ## Overview
 Quantifying annular dark field (ADF) scanning transmission electron microscopy (STEM) images in terms of composition or thickness often relies on probe-position integrated scattering cross sections (PPISCSs). In order to compare experimental PPISCSs with theoretically predicted ones, expensive simulations are needed for a given specimen, zone axis orientation, and a variety of microscope settings. The computation time of such simulations can be lengthy, even when using a single GPU.
