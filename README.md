@@ -19,6 +19,7 @@ To install **rt_ppiscs** and its dependencies, run the following command in your
 pip install rt_ppiscs
 ```
 
+**Python example**
 ```python
 # INPUT:
 # The input data must be a 2D numpy array with 9 columns:

@@ -1,4 +1,4 @@
-classdef PPISCS_Model
+classdef PPISCS
     methods (Static)
         function y = swish(x)
             y = x./(1 + exp(-x));
@@ -10,30 +10,30 @@ classdef PPISCS_Model
         
         function y = eval_on_batch(y, layer_bias, layer_weights)
             n_layers = length(layer_bias);
-            y = PPISCS_Model.swish(y*layer_weights{1} + layer_bias{1});
+            y = PPISCS.swish(y*layer_weights{1} + layer_bias{1});
             for i = 2:n_layers-1
-                y = [y, PPISCS_Model.swish(y*layer_weights{i} + layer_bias{i})];
+                y = [y, PPISCS.swish(y*layer_weights{i} + layer_bias{i})];
             end
             y = y*layer_weights{end} + layer_bias{end};
-            y = PPISCS_Model.softplus(y);
+            y = PPISCS.softplus(y);
         end
         
         function y = eval(y_i, bias, weights, batch_size)
             n_y = size(y_i, 1);
             if n_y <= batch_size
-                y = PPISCS_Model.eval_on_batch(y_i, bias, weights);
+                y = PPISCS.eval_on_batch(y_i, bias, weights);
                 return
             end
             
             y = zeros(n_y, numel(bias{end}));
             for ik = 1:batch_size:n_y
-                y(ik:ik+batch_size-1, :) = PPISCS_Model.eval_on_batch(y_i(ik:ik+batch_size-1, :), bias, weights);
+                y(ik:ik+batch_size-1, :) = PPISCS.eval_on_batch(y_i(ik:ik+batch_size-1, :), bias, weights);
             end
         end
     end
     
     methods
-        function obj = PPISCS_Model(model_path)
+        function obj = PPISCS(model_path)
             if nargin < 1
                 model_path = 'coef_scs_fcc.mat';
             end

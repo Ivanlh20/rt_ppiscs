@@ -16,14 +16,14 @@
 %     - rmsd_3d: root mean square displacement 
 %
 % REQUIREMENTS:
-% - PPISCS_Model class
+% - PPISCS class
 
 clear; clc;
 figure(1); clf;
 
 % Input data must be a 2D numpy array with 9 columns
 x = [79, 0, 300, 0.001, -50, 20, 30, 90, 0.085];
-model = PPISCS_Model('coef_scs_fcc.mat');
+model = PPISCS('coef_scs_fcc.mat');
 y_p = model.predict(x);
 
 % Plot the predictions
@@ -35,7 +35,11 @@ pbaspect([1.25 1, 1]);
 
 % Add text to the plot describing the input data
 str_text{1} = ['Z = ', num2str(x(1), '%d')];
-str_text{2} = ['Zone axis = ', ilm_ifelse(x(2)==1, '001', '110')];
+if x(2)==1 
+    str_text{2} = 'Zone axis = 001';
+else 
+    str_text{2} = 'Zone axis = 110'; 
+end
 str_text{3} = ['E_0 = ', num2str(x(3), '%d'), ' keV'];
 str_text{4} = ['Cs = ', num2str(1000*x(4), '%3.1f'), ' μm'];
 str_text{5} = ['Def = ', num2str(x(5), '%4.1f'), ' Å'];
