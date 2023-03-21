@@ -1,8 +1,10 @@
-# COPYRIGHT 2023 IVAN LOBATO <IVANLH20@GMAIL.COM>
-# 
-# DESCRIPTION:
-# This code predicts the probe position-integrated scattering cross-sections for a single element fcc crystal. The model is trained using the PPISCS_Model class imported from PPISCS_Model.py.
-#
+"""
+This code predicts the probe position-integrated scattering cross-sections for a single element fcc crystal. 
+The model is trained using the PPISCS class imported from model.py.
+
+Author: Ivan Lobato
+Email: Ivanlh20@gmail.com
+"""
 # INPUT:
 # The input data must be a 2D numpy array with 9 columns:
 #     - Z: atomic number
@@ -18,17 +20,17 @@
 # REQUIREMENTS:
 # - matplotlib.pyplot
 # - numpy
-# - PPISCS_Model class imported from PPISCS_Model.py
+# - PPISCS class imported from model.py
 
 import matplotlib.pyplot as plt
 import numpy as np
-from PPISCS_Model import PPISCS_Model
-
+from model import PPISCS
+       
 # Input data must be a 2D numpy array with 9 columns
 x = np.array([[79, 0, 300, 0.001, -50, 20, 30, 90, 0.085]])
 
-# Load the PPISCS_Model class from PPISCS_Model.py
-model = PPISCS_Model('coef_scs_fcc.mat')
+# Load the PPISCS class from model.py
+model = PPISCS('coef_scs_fcc.mat')
 
 # Make predictions using the PPISCS_Model class
 y_p = model.predict(x)
